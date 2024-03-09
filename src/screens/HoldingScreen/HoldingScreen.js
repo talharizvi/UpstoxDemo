@@ -5,6 +5,7 @@ import HoldingItem from '../../components/HoldingItem';
 import FooterSection from '../../components/FooterSection';
 import styles from './styles';
 import { Colors, holdingsUrl } from '../../utils/constant';
+import { calculateCurrentValues, calculateTotalInvestment, calculateTodayPNL } from '../../utils/helper';
 
 const HoldingScreen = () => {
   const [data, setData] = useState([]);             //holdings data 
@@ -31,27 +32,10 @@ const HoldingScreen = () => {
     }
   };
   
-  const currentValues = data
-    .reduce((acc, holding) => {
-      const value = holding.ltp * holding.quantity;
-      return acc + value;
-    }, 0)
-    .toFixed(2);
-
-  const totalInvestment = data
-    .reduce((acc, holding) => {
-      const investmentValue = holding.avgPrice * holding.quantity;
-      return acc + investmentValue;
-    }, 0)
-    .toFixed(2);
-
+  const currentValues = calculateCurrentValues(data);
+  const totalInvestment = calculateTotalInvestment(data);
+  const todayPNL = calculateTodayPNL(data);
   const totalPNL = currentValues - totalInvestment;
-
-  const todayPNL = data
-    .reduce((acc, current) => {
-      return acc + ((current.close - current.ltp) * current.quantity);
-    }, 0)
-    .toFixed(2);
 
   const renderListItem = ({ item, index }) => <HoldingItem {...item} index={index} length={data.length}/>;
 
@@ -69,7 +53,7 @@ const HoldingScreen = () => {
         <Header title="Upstox Holding" />
         
         {isLoading ? (
-        <ActivityIndicator size="large" color={Colors.dark} style={styles.loaderView}/>
+        <ActivityIndicator size="large" color={Colors.primary} style={styles.loaderView}/>
       ) : (
         <View style={styles.parentView}>
 
