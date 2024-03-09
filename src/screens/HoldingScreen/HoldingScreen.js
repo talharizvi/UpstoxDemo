@@ -51,6 +51,7 @@ const HoldingScreen = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="light-content" backgroundColor={Colors.secondary} />
         <Header title="Upstox Holding" />
         
         {isLoading ? (
