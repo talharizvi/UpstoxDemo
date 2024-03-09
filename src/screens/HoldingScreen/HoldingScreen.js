@@ -7,9 +7,9 @@ import styles from './styles';
 import { Colors, holdingsUrl } from '../../utils/constant';
 
 const HoldingScreen = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
-  const [error, setError] = useState(null);
+  const [data, setData] = useState([]);             //holdings data 
+  const [isLoading, setIsLoading] = useState(true); //loader status
+  const [error, setError] = useState(null);         //error
 
   useEffect(() => {
     fetchData();
