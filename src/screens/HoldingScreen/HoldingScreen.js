@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, ActivityIndicator, Text, Button } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, Button, SafeAreaView, StatusBar } from 'react-native';
 import Header from '../../components/Header';
 import HoldingItem from '../../components/HoldingItem';
 import FooterSection from '../../components/FooterSection';
@@ -49,13 +49,14 @@ const HoldingScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <>
+    <SafeAreaView style={styles.container}>
         <Header title="Upstox Holding" />
         
         {isLoading ? (
         <ActivityIndicator size="large" color={Colors.primary} style={styles.loaderView}/>
-      ) : (
-        <View style={styles.parentView}>
+      ) : ( 
+         <View style={styles.parentView}>
 
           <View>
             <FlatList
@@ -65,20 +66,20 @@ const HoldingScreen = () => {
             style={styles.listStyle}
             contentContainerStyle={styles.listContentStyle}
            />
-          </View>
+          </View> 
 
-          <FooterSection
+           <FooterSection
             currentValue={currentValues}
             todayPNL={todayPNL}
             totalPNL={totalPNL}
             totalInvestment={totalInvestment}
-          />
+          /> 
 
-        </View>   
+         </View>   
       )}  
-       
-      
-    </View>
+    </SafeAreaView>
+    <SafeAreaView style={styles.bottomSafeAreaView}/>
+    </>
   );
 };
 

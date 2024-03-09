@@ -8,7 +8,7 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
+  StyleSheet,View
 } from 'react-native';
 import HoldingScreen from './screens/HoldingScreen';
 import { Colors } from './utils/constant';
@@ -16,9 +16,9 @@ import { Colors } from './utils/constant';
 function App() {
 
   return (
-    <SafeAreaView style={styles.rootView}>
+    <View style={styles.rootView}>
       <HoldingScreen />
-    </SafeAreaView>
+    </View>
   );
 }
 

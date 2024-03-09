@@ -15,8 +15,12 @@ const styles = {
         justifyContent:'center'
     },
     parentView: {
-        justifyContent:'space-between', 
+        justifyContent:'space-between',
         flex:1
+    },
+    bottomSafeAreaView: {
+        flex: 0, 
+        backgroundColor: Colors.secondary
     }
 };
   
