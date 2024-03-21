@@ -6,32 +6,11 @@ import FooterSection from '../../components/FooterSection';
 import styles from './styles';
 import { Colors, holdingsUrl } from '../../utils/constant';
 import { calculateCurrentValues, calculateTotalInvestment, calculateTodayPNL } from '../../utils/helper';
+import useFetchHoldingData from '../../hooks/useFetchHoldingData';
 
 const HoldingScreen = () => {
-  const [data, setData] = useState([]);             //holdings data 
-  const [isLoading, setIsLoading] = useState(true); //loader status
-  const [error, setError] = useState(null);         //error
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(holdingsUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const data = await response.json();
-      setData(data.userHolding);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setError(error.message);
-      setIsLoading(false);
-    }
-  };
-  
+  const [data, isLoading, error] = useFetchHoldingData();
   const currentValues = calculateCurrentValues(data);
   const totalInvestment = calculateTotalInvestment(data);
   const todayPNL = calculateTodayPNL(data);
